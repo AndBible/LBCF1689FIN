@@ -6,9 +6,12 @@ import pkg from "jsdom";
 const { JSDOM } = pkg;
 import fs from "fs";
 import path from "path";
+import crypto from "crypto";
 
 const OUT_DIR = "html";
 const BOOK_TITLE = "1689 Lontoon baptistien uskontunnustus ja baptistikatekismus vuodelta 1693";
+// Cache-busting token: changes whenever style.css changes (GitHub Pages caches for 10 min).
+const CSS_VERSION = crypto.createHash("sha256").update(fs.readFileSync(path.join("html", "style.css"))).digest("hex").slice(0, 10);
 const SITE_URL = "https://tunnustus.reba.fi/";
 const EDITORS = "Toim. Eelis Halmemies, Juhana Lalli, Mikko Sivonen";
 
@@ -227,7 +230,7 @@ function head(title, description, filename) {
 <link rel="icon" href="assets/img/reba-logo.png">
 <link rel="preload" href="assets/fonts/bitter-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=${CSS_VERSION}">
 <script>try{if(localStorage.getItem("hideRefs")==="1")document.documentElement.classList.add("hide-refs")}catch(e){}</script>
 </head>`;
 }
