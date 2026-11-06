@@ -34,6 +34,7 @@
   --sage-soft: #eef3ea;
   --stone: #b5bdbc;
   --accent: #d8613c;
+  --eyebrow: #3d6b5f;
   --link: #2f5f6e;
   --link-hover: #0f253a;
 
@@ -156,11 +157,12 @@ a:hover { color: var(--link-hover); text-decoration-color: currentColor; }
 .eyebrow {
   margin: 0 0 0.6rem;
   font-family: var(--font-ui);
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.2em;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--eyebrow);
+  text-shadow: 0 0 2px #fff, 0 0 8px #fff, 0 0 14px rgba(255, 255, 255, 0.9);
 }
 
 .ornament {
