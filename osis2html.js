@@ -9,6 +9,7 @@ import path from "path";
 
 const OUT_DIR = "html";
 const BOOK_TITLE = "1689 Lontoon baptistien uskontunnustus ja baptistikatekismus vuodelta 1693";
+const SITE_URL = "https://tunnustus.reba.fi/";
 const EDITORS = "Toim. Eelis Halmemies, Juhana Lalli, Mikko Sivonen";
 
 // Chapters (by osisID) that are prayers/hymns whose source line breaks are meaningful.
@@ -213,7 +214,7 @@ const ICON_ARROW_L = `<svg aria-hidden="true" viewBox="0 0 24 24" width="20" hei
 const ICON_ARROW_R = `<svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 const ICON_TOC = `<svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><path d="M4 6h16M4 12h16M4 18h10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`;
 
-function head(title, description) {
+function head(title, description, filename) {
     return `<!DOCTYPE html>
 <html lang="fi">
 <head>
@@ -221,6 +222,7 @@ function head(title, description) {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>${escapeHtml(title)}</title>
 <meta name="description" content="${escapeHtml(description)}">
+<link rel="canonical" href="${SITE_URL}${filename === "index.html" ? "" : filename}">
 <meta name="theme-color" content="#ffffff">
 <link rel="icon" href="assets/img/reba-logo.png">
 <link rel="preload" href="assets/fonts/bitter-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -297,7 +299,7 @@ function chapterPage(page, prev, next) {
     const section = SECTIONS[page.section];
     const eyebrow = page.eyebrow || section.eyebrow || "";
     const hasRefs = page.html.includes("note-crossReference");
-    return `${head(`${page.titleText} – ${BOOK_TITLE}`, `${page.titleText}. ${BOOK_TITLE}.`)}
+    return `${head(`${page.titleText} – ${BOOK_TITLE}`, `${page.titleText}. ${BOOK_TITLE}.`, page.filename)}
 <body class="page-chapter section-${page.section}${page.verse ? " verse" : ""}">
 ${topBar({ showRefToggle: hasRefs })}
 ${hero("slim")}
@@ -333,7 +335,7 @@ function indexPage(pages) {
       </ol>
     </section>`;
     };
-    return `${head(BOOK_TITLE, `${BOOK_TITLE}. ${EDITORS}.`)}
+    return `${head(BOOK_TITLE, `${BOOK_TITLE}. ${EDITORS}.`, "index.html")}
 <body class="page-index">
 ${topBar({ showRefToggle: false })}
 ${hero("full")}
