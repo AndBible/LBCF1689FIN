@@ -12,7 +12,11 @@ Sword module:
 
 HTML:
 - install dependencies first `npm install`
-- then `node osis2html.js`
+- then `node osis2html.js` (regenerates every page in `html/`)
+
+The page layout and styles follow the visual identity of [reba.fi](https://reba.fi)
+(Jyväskylän reformoitu baptistiseurakunta); fonts and illustrations are in `html/assets/`.
+Preview locally e.g. with `python3 -m http.server -d html 8080`.
 
 ## License
 
